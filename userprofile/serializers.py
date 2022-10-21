@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import UserProfile
 from rest_framework import serializers
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
@@ -21,7 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
+        group_users_staff = Group.objects.get(name='users_staff')
+        user = User.objects.create_user(
+            **validated_data,
+            is_staff=True
+        )
+        user.groups.add(group_users_staff)
         Token.objects.create(user=user)
         return user
 

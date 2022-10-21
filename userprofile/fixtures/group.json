@@ -1,0 +1,9 @@
+[
+    {
+      "model": "auth.group",
+      "fields": {
+        "name": "users_staff",
+        "permissions": [28]
+      }
+    }
+]
