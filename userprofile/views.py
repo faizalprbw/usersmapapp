@@ -1,3 +1,39 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
+from .models import UserProfile
+from .serializers import UserProfileSerializer, UserSerializer
+from rest_framework import viewsets
+from rest_framework.authtoken.models import Token
+from urllib.parse import unquote
 
-# Create your views here.
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        queryset = User.objects.all()
+        token = self.request.query_params.get('token', None)
+
+        if token is not None:
+            try:
+                queryset = [Token.objects.get(key=token.replace('\"', '')).user]
+            except ObjectDoesNotExist:
+                queryset = []
+        return queryset
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+    def get_queryset(self):
+        queryset = UserProfile.objects.all()
+        user = self.request.query_params.get('user', None)
+
+        if user is not None:
+            try:
+                queryset = [UserProfile.objects.get(user=user)]
+            except ObjectDoesNotExist:
+                queryset = []
+        return queryset

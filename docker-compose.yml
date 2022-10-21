@@ -9,8 +9,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     env_file:
       - .env
     restart: "on-failure"
@@ -30,6 +30,31 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     restart: 'on-failure'
+    networks:
+      - usersmapapp-api
+
+  usersmapapp-dashboard:
+    build:
+      context: ./usersmapapp_dashboard
+      dockerfile: Dockerfile.dev
+    container_name: usersmapapp_dashboard
+    volumes:
+      - /app/node_modules
+      - ./usersmapapp_dashboard:/app
+    depends_on:
+      - usersmapapp-api
+    networks:
+      - usersmapapp-api
+
+  nginx:
+    restart: always
+    depends_on:
+      - usersmapapp-api
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports:
+      - 80:80
     networks:
       - usersmapapp-api
 

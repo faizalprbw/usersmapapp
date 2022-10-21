@@ -1,0 +1,63 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+/* Layout */
+header {
+  position: absolute;
+  right: 0px;
+  z-index: 9999;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  position: absolute;
+  background-color: #ffffff;
+  left: 470px;
+  top: 160px;
+  z-index: 9999;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Leaflet Style */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #000000;
+  color: #ffffff;
+  border: 2px dashed #fff;
+}
