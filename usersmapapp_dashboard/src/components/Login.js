@@ -2,6 +2,7 @@ import axios from "axios";
 import {Navigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 import {commonFunctions} from "../helpers/commonFunctions"
+import { Spinner } from "react-bootstrap";
 
 
 export const Login = (props) => {
@@ -11,7 +12,7 @@ export const Login = (props) => {
     const [isError, setIsError] = useState(false);
 
     useEffect ( ()=> { 
-        localStorage.getItem("user") ? setNavigate(true) : setNavigate(false) 
+        localStorage.getItem("token") ? setNavigate(true) : setNavigate(false) 
     } , [])
 
     const submit = async e => {
@@ -22,9 +23,26 @@ export const Login = (props) => {
                 username, password
             }, {withCredentials: true});
             localStorage.setItem("token", JSON.stringify(data.token));
-            setNavigate(true);
-            props.SetIsLogged(true);
-            commonFunctions.getUsers(localStorage.getItem("token"), props.setDisplayname)
+            commonFunctions.getUsers(localStorage.getItem("token"))
+            setTimeout(function(){
+                window.location.reload();
+                setNavigate(true);
+                props.SetIsLogged(true);
+                return (
+                    <Spinner
+                       animation="border"
+                       variant="danger"
+                       role="status"
+                       style={{
+                          width: "200px",
+                          height: "200px",
+                          margin: "auto",
+                          display: "block",
+                          zIndexL: "9999"
+                       }}
+                    />
+                 );
+            }, 1000);
         } catch (error) {
             setIsError(true);
         }
@@ -53,6 +71,7 @@ export const Login = (props) => {
             </div>
             {isError ? <span className="text-danger">Username or Password Wrong</span> : ''}
             <button className="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <span className="text-info">Sign in using registered account..!</span>
         </form>
     </main>
 }

@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-DEPARTEMENT_CHOICES = [
+DEPARTMENT_CHOICES = [
     ('Engineering and Infrastructure', 'Engineering and Infrastructure'),
     ('Geo Science', 'Geo Science'),
     ('Information Technology', 'Information Technology'),
@@ -29,8 +29,8 @@ class UserProfile(models.Model):
     )
     department = models.CharField(
         max_length=100,
-        choices=DEPARTEMENT_CHOICES,
-        verbose_name=_('Departements')
+        choices=DEPARTMENT_CHOICES,
+        verbose_name=_('Departments')
     )
     phone_number = PhoneNumberField(
         verbose_name = _('Phone Number'),
