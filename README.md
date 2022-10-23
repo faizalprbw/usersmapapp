@@ -48,11 +48,14 @@ This dashboard was developed by using various kinds of open-source frameworks/li
 <p>
 <img src="https://user-images.githubusercontent.com/7609337/197407388-c1bd766e-5fd2-41ef-8ab0-8c86e3e52c5a.png" width="140">
 <img src="https://user-images.githubusercontent.com/7609337/197407516-d475c634-4f13-49e0-9cdb-3d5bf725863f.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407866-9432f269-3113-4731-90ed-0d15186bf1d2.png" width="140">
 <img src="https://user-images.githubusercontent.com/7609337/197407426-de859dff-b62c-4494-9032-37da30c7ed8c.png" width="140">
 <img src="https://user-images.githubusercontent.com/7609337/197407445-b05393ae-a111-4b8c-a650-1ed35e934610.png" width="140">
 <img src="https://user-images.githubusercontent.com/7609337/197407552-f14b8b52-c7cb-4302-b2ee-9bc50b3c7b46.png" width="140">
-<img src="https://user-images.githubusercontent.com/7609337/197407661-59c45d1d-f231-4999-ba09-7a3d7ad65bbe.png" width="140">
 <img src="https://user-images.githubusercontent.com/7609337/197407631-c547489f-d994-4c73-9109-f50b12d96e85.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407661-59c45d1d-f231-4999-ba09-7a3d7ad65bbe.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407831-39c03d2d-e841-45ac-a4a4-a65725851bab.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407992-f1d43c57-d7f1-438f-b35a-73557892e6a5.png" width="140">
 </p>
 
 <!-- GETTING STARTED -->
