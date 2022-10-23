@@ -65,7 +65,7 @@ This dashboard was developed by using various kinds of open-source frameworks/li
 
 ### Prerequisites
 
-This web application is delivered by using Docker container so it need to installed first. Step to install Docker can be access <a href='https://docs.docker.com/get-started/'>here</a>  
+This web application is delivered by using Docker container so it need to be installed first. Step to install Docker can be access <a href='https://docs.docker.com/get-started/'>here</a>  
 
 ### Installation
 1. Clone usersmapapp sourcecode from repository
