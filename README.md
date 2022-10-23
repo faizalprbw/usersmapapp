@@ -45,7 +45,15 @@ Users Map App (usersmapapp) is a web dashboard to mapping registered users based
 ### Built With
 This dashboard was developed by using various kinds of open-source frameworks/libraries. <a href='https://www.djangoproject.com/'>Django (Python)</a> with <a href='https://www.django-rest-framework.org/'>Django Rest Framework</a> to create API in the back-end consumed by dashboard developed by <a href='https://reactjs.org/'>ReactJS (JavaScript)</a> for front-end. Location of registered users displayed on dashboard map by using <a href='https://leafletjs.com/'>Leaflet JS<a>. Database used in this system is <a href='https://www.postgresql.org/'>PostgreSQL</a> with spatial extension by using <a href='https://postgis.net/'>PostGIS</a>. All of these components are delivered as containers by using <a href='https://www.docker.com/'>Docker</a> to simplify installation procedure and production deployment. There is also a web server image in the containers which is using <a href='https://www.nginx.com/'>NGINX</a>.  
 
-<image>
+<p>
+<img src="https://user-images.githubusercontent.com/7609337/197407388-c1bd766e-5fd2-41ef-8ab0-8c86e3e52c5a.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407516-d475c634-4f13-49e0-9cdb-3d5bf725863f.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407426-de859dff-b62c-4494-9032-37da30c7ed8c.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407445-b05393ae-a111-4b8c-a650-1ed35e934610.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407552-f14b8b52-c7cb-4302-b2ee-9bc50b3c7b46.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407661-59c45d1d-f231-4999-ba09-7a3d7ad65bbe.png" width="140">
+<img src="https://user-images.githubusercontent.com/7609337/197407631-c547489f-d994-4c73-9109-f50b12d96e85.png" width="140">
+</p>
 
 <!-- GETTING STARTED -->
 
