@@ -35,13 +35,33 @@ class UserProfileSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = UserProfile
         geo_field = 'address_location'
-        fields = [
-            'user',
-            'photo',
-            'name',
-            'department',
-            'phone_number',
-            'address_location',
-            'address_description'
-        ]
-        read_only_fields = ['id', 'created_at', 'updated_at']
+        fields = '__all__'
+        extra_kwargs = {
+            'id': {'read_only': True},
+            'user': {'validators': []},
+        }
+
+    def create(self, validated_data):
+        userprofile, created = UserProfile.objects.update_or_create(
+            user=validated_data.get('user', None),
+            defaults={
+                'name': validated_data.get('name', None),
+                'photo': validated_data.get('photo', None),
+                'department': validated_data.get('department', None),
+                'phone_number': validated_data.get('phone_number', None),
+                'address_location': validated_data.get('address_location', None),
+                'address_description': validated_data.get('address_description', None)
+            })
+        return userprofile
+
+    def update(self, instance, validated_data):
+        """
+        Update and return an existing `Snippet` instance, given the validated data.
+        """
+        instance.name = validated_data.get('name', instance.name)
+        instance.photo = validated_data.get('photo', instance.photo)
+        instance.department = validated_data.get('department', instance.department)
+        instance.phone_number = validated_data.get('phone_number', instance.phone_number)
+        instance.address_location = validated_data.get('address_location', instance.address_location)
+        instance.save()
+        return instance

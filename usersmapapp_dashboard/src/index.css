@@ -101,7 +101,11 @@ header {
 
 .leaflet-popup-content-wrapper,
 .leaflet-popup-tip {
-  background: #000000;
-  color: #ffffff;
-  border: 2px dashed #fff;
+  background: #fff;
+  color: #000000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.leaflet-popup-img {
+  width: 80px;
 }

@@ -1,7 +1,7 @@
 import {useState, useEffect, useMemo, useRef, useCallback  } from "react";
 import axios from "axios";
 import {Navigate} from 'react-router-dom';
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import {commonFunctions} from "../helpers/commonFunctions"
 import Select from 'react-select';
 import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
@@ -13,21 +13,22 @@ export const Profile = (props) => {
     const [department, setDepartment] = useState('');
     const [phonenumber, setPhonenumber] = useState('');
     const [addressdescription, setAddressdescription] = useState('');
-    const [addresslocation, setAddresslocation] = useState();
     const [navigate, setNavigate] = useState(false);
-    
-    var center = {
-        lat:-6.195, lng:106.823
-    }
-    function DraggableMarker() {
-        if(localStorage.getItem('location')){
-            center = {
-                lat: localStorage.getItem('location').split(",")[1],
-                lng: localStorage.getItem('location').split(",")[0],
-            }
+    const [isError, setIsError] = useState(false);
+    let center;
+    if(localStorage.getItem('location')){
+        center = {
+            lat: localStorage.getItem('location').split(",")[1],
+            lng: localStorage.getItem('location').split(",")[0],
         }
-        const [draggable, setDraggable] = useState(false)
-        const [position, setPosition] = useState(center)
+    } else {
+        center = {
+            lat:-6.195, lng:106.823
+        }
+    }   
+    const [draggable, setDraggable] = useState(false)
+    const [position, setPosition] = useState(center)
+    function DraggableMarker() {
         const markerRef = useRef(null)
         const eventHandlers = useMemo(() => ({
             dragend() {
@@ -70,18 +71,26 @@ export const Profile = (props) => {
 
     const submit = async e => {
         e.preventDefault();
-        console.log(addresslocation);
-        console.log(profilename)
-        console.log(photoprofile)
-        console.log(department)
-        console.log(phonenumber)
-        console.log(addressdescription)
-        console.log(addresslocation)
-        // await axios.get('profiles/', {
-        //     username, password
-        // });
-
-        setNavigate(true);
+        const uploadData = new FormData();
+        uploadData.append('user', localStorage.getItem('userid'));
+        uploadData.append('name', profilename);
+        uploadData.append('photo', photoprofile, photoprofile.name);
+        uploadData.append('department', department['value']);
+        uploadData.append('phone_number', phonenumber);
+        uploadData.append('address_location', 'SRID=4326;POINT ('+position["lng"].toString()+' '+position["lat"].toString()+')');
+        uploadData.append('address_description', addressdescription);
+        
+        axios({
+            method: 'post',
+            url: 'profiles/',
+            data: uploadData
+        }).then(res=>{
+            commonFunctions.getProfiles();
+            setNavigate(true);
+        }).catch(function (error) {
+            console.log(error.response.data);
+            setIsError(true);
+        });
     }
 
     const closeprofile = () => {
@@ -105,6 +114,7 @@ export const Profile = (props) => {
                     <Row>
                         <Col xs={3}>
                             <div className="form-floating">
+                                <input type="file" onChange={(evt) => setPhotoprofile(evt.target.files[0])}/>
                                 <img src={localStorage.getItem('profilephoto')} className='profile-photo' />
                             </div>
                         </Col>
@@ -119,14 +129,13 @@ export const Profile = (props) => {
                             <div className="form-floating">
                                 <Select options={options} className="form-control" 
                                     defaultValue={options[selected_department_idx]}
-                                    onChange={e => setDepartment(e.target.value)}
+                                    onChange={setDepartment}
                                 />
                                 <label>Department</label>
                             </div>
                             <div className="form-floating">
-                                <input type="tel" className="form-control"
+                                <input type="text" className="form-control"
                                     onChange={e => setPhonenumber(e.target.value)}
-                                    pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                                     placeholder='+628125xxxxxxxx'
                                     defaultValue={localStorage.getItem('phonenumber')}
                                 />
@@ -152,6 +161,7 @@ export const Profile = (props) => {
                                     <DraggableMarker />
                                 </MapContainer>
                             </div>
+                            {isError ? <h5 className="text-danger">Input Parameters Error</h5> : ''}
                             <div className="form-floating">
                                 <button className="w-100 btn btn-lg btn-primary" type="submit">Update</button>
                             </div>

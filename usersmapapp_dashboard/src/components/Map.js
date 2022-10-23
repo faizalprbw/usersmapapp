@@ -12,7 +12,7 @@ export const Map = () => {
    const { data, error } = useSWR("/profiles", fetcher);
    const userprofiles = data && !error ? data : {};
    const position = [-6.195, 106.823];
-   const zoom = 13;
+   const zoom = 10;
 
    if (error) {
       return <Alert variant="danger">Smoething Wrong</Alert>;
@@ -32,6 +32,7 @@ export const Map = () => {
          />
       );
    }
+   console.log(userprofiles);
    return (
       <MapContainer center={position} zoom={zoom}>
          <TileLayer
@@ -59,7 +60,10 @@ export const Map = () => {
                   }}
                >
                   <div>
-                     <h6>{userprofile.properties.username}</h6>
+                     <img src={userprofile.properties.photo} className='leaflet-popup-img'></img>
+                     <h6>{userprofile.properties.name}</h6>
+                     <h6>{userprofile.properties.phone_number}</h6>
+                     <h6>{userprofile.properties.department}</h6>
                   </div>
                </Popup>
             </Marker>
