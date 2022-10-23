@@ -41,7 +41,6 @@
 <!-- ABOUT THE PROJECT -->
 
 ## Users Map App
-<a  href="">View Demo</a>
 
 Users Map App (usersmapapp) is a web dashboard to mapping registered users based on address location. This is an experimental project to testing the integration of Django & ReactJS with spatial capabilities.
   
@@ -114,13 +113,18 @@ docker-compose exec usersmapapp-api python manage.py loaddata userprofile/fixtur
 ## Create Superuser Account
 docker-compose exec usersmapapp-api python manage.py createsuperuser
 ```
-
-7. Optionally.. do the following step to populate example data from CSV into database..
+7. Optionally.. do the following step to populate example users data into database..
   
 ```sh
-## Create Superuser Account
-docker-compose exec usersmapapp-api python manage.py createsuperuser
-## Access http://localhost/admin and login using superuser account
+# This example will generate 100 fake users with random location coordinate
+docker-compose exec usersmapapp-api python populate_datadummy.py 100
+# After run this command, users point location populated on map dashboard
+```
+
+### Unit Test
+This django web application is tested by using pytest. However, this feature is still on development. To do testing, run following syntax on root directory (/usersmapapp)
+```
+pytest
 ```
 
 <p  align="right">(<a  href="#readme-top">back to top</a>)</p>

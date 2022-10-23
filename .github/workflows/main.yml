@@ -4,8 +4,8 @@ jobs:
   test_project:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
       - run: touch .env
       - run: echo POSTGRES_USER="admin" >> .env
       - run: echo POSTGRES_PASSWORD="password123" >> .env
@@ -19,4 +19,5 @@ jobs:
       - run: docker-compose up -d --build
       - run: docker-compose exec usersmapapp-api python manage.py migrate --noinput
       - run: docker-compose exec usersmapapp-api python manage.py loaddata userprofile/fixtures/group.json .
+      - run: docker-compose exec usersmapapp-api python populate_datadummy.py
       - run: pytest
