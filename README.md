@@ -32,8 +32,6 @@
 
 </li>
 
-<li><a  href="#user-guide">User Guide</a></li>
-
 </ol>
 
 </details>
@@ -116,10 +114,11 @@ docker-compose exec usersmapapp-api python manage.py createsuperuser
 7. Optionally.. do the following step to populate example users data into database..
   
 ```sh
-# This example will generate 100 fake users with random location coordinate
+# This example will automatically generate 100 fake users with random location coordinate
 docker-compose exec usersmapapp-api python populate_datadummy.py 100
-# After run this command, users point location populated on map dashboard
 ```
+Check http://localhost on web browser after run this command, users point location will be populated on map dashboard
+
 
 ### Unit Test
 This django web application is tested by using pytest. However, this feature is still on development. To do testing, run following syntax on root directory (/usersmapapp)
