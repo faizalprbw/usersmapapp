@@ -13,7 +13,7 @@ jobs:
       - run: echo DATABASE="postgres" >> .env
       - run: echo PG_HOST="postgres-db" >> .env
       - run: echo PG_PORT="5432" >> .env
-      - run: echo SECRET_KEY="django-insecure-2yz@s#p1fu)mb1$(uzd8proztx+8$pyaa^v(v88=clq%m@&*#d" >> .env
+      - run: echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
       - run: echo DEBUG="True" >> .env
       - run: echo ALLOWED_HOSTS="localhost 127.0.0.1 usersmapapp-api [::1] " >> .env
       - run: docker-compose up -d --build
