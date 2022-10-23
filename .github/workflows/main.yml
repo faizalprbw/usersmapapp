@@ -1,0 +1,22 @@
+name: test_Django_usersmapapp
+on: [pull_request, push] 
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: touch .env
+      - run: echo POSTGRES_USER="admin" >> .env
+      - run: echo POSTGRES_PASSWORD="password123" >> .env
+      - run: echo POSTGRES_DB="usersmapapp" >> .env
+      - run: echo DATABASE="postgres" >> .env
+      - run: echo PG_HOST="postgres-db" >> .env
+      - run: echo PG_PORT="5432" >> .env
+      - run: echo SECRET_KEY="django-insecure-2yz@s#p1fu)mb1$(uzd8proztx+8$pyaa^v(v88=clq%m@&*#d" >> .env
+      - run: echo DEBUG="True" >> .env
+      - run: echo ALLOWED_HOSTS="localhost 127.0.0.1 usersmapapp-api [::1] " >> .env
+      - run: docker-compose up -d --build
+      - run: docker-compose exec usersmapapp-api python manage.py migrate --noinput
+      - run: docker-compose exec usersmapapp-api python manage.py loaddata userprofile/fixtures/group.json .
+      - run: pytest

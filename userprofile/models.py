@@ -13,7 +13,7 @@ DEPARTMENT_CHOICES = [
     ('Contract Administration', 'Contract Administration'),
     ('Accounting and Finance', 'Accounting and Finance'),
     ('Research and Development', 'Research and Development'),
-    ('RHuman Resources', 'Human Resources')
+    ('Human Resources', 'Human Resources')
 ]
 
 class UserProfile(models.Model):

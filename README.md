@@ -46,7 +46,7 @@
 Users Map App (usersmapapp) is a web dashboard to mapping registered users based on address location. This is an experimental project to testing the integration of Django & ReactJS with spatial capabilities.
   
 ### Built With
-This dashboard was developed by using various kinds of open-source frameworks/libraries. This dashboard was developed by using <a href='https://www.djangoproject.com/'>Django (Python)</a> with <a href='https://www.django-rest-framework.org/'>Django Rest Framework</a> to create API in the back-end consumed by dashboard developed by <a href='https://reactjs.org/'>ReactJS (JavaScript)</a> for front-end. Location of registered users displayed on dashboard map by using <a href='https://leafletjs.com/'>Leaflet JS<a>. Database used in this system is <a href='https://www.postgresql.org/'>PostgreSQL</a> with spatial extension by using <a href='https://postgis.net/'>PostGIS</a>. All of these components are delivered as containers by using <a href='https://www.docker.com/'>Docker</a> to simplify installation procedure and production deployment. There is also a web server image in the containers which is using <a href='https://www.nginx.com/'>NGINX</a>.  
+This dashboard was developed by using various kinds of open-source frameworks/libraries. <a href='https://www.djangoproject.com/'>Django (Python)</a> with <a href='https://www.django-rest-framework.org/'>Django Rest Framework</a> to create API in the back-end consumed by dashboard developed by <a href='https://reactjs.org/'>ReactJS (JavaScript)</a> for front-end. Location of registered users displayed on dashboard map by using <a href='https://leafletjs.com/'>Leaflet JS<a>. Database used in this system is <a href='https://www.postgresql.org/'>PostgreSQL</a> with spatial extension by using <a href='https://postgis.net/'>PostGIS</a>. All of these components are delivered as containers by using <a href='https://www.docker.com/'>Docker</a> to simplify installation procedure and production deployment. There is also a web server image in the containers which is using <a href='https://www.nginx.com/'>NGINX</a>.  
 
 <image>
 
@@ -93,8 +93,8 @@ ALLOWED_HOSTS=localhost 127.0.0.1 usersmapapp-api [::1]
 3. Docker Build and Up.. Make sure Docker & Docker Compose already running on your computer / server
 
 ```sh
-docker --version
-docker-compose --version
+docker --version # 20.10.17 on my local env
+docker-compose --version # v2.10.2 on my local env
 docker-compose up -d --build
 ```
 
@@ -115,16 +115,12 @@ docker-compose exec usersmapapp-api python manage.py loaddata userprofile/fixtur
 docker-compose exec usersmapapp-api python manage.py createsuperuser
 ```
 
-6. Optionally.. If we want testing dashboard map with data example, do the following step to populate example data in CSV into database..
+7. Optionally.. do the following step to populate example data from CSV into database..
   
 ```sh
 ## Create Superuser Account
 docker-compose exec usersmapapp-api python manage.py createsuperuser
 ## Access http://localhost/admin and login using superuser account
 ```
-  
-## User Guide  
-
-Please refer to this [Documentation](https://example.com)
 
 <p  align="right">(<a  href="#readme-top">back to top</a>)</p>

@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
 from .models import UserProfile
 from .serializers import UserProfileSerializer, UserSerializer
 from rest_framework import viewsets
@@ -22,7 +23,6 @@ class UserViewSet(viewsets.ModelViewSet):
         return queryset
 
 
-
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
@@ -36,3 +36,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
             except ObjectDoesNotExist:
                 queryset = []
         return queryset
+
+
+def dashboard_view(request):
+    response = redirect('/dashboard')
+    return response

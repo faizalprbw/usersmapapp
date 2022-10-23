@@ -96,9 +96,29 @@ export const Profile = (props) => {
         }).then(res=>{
             commonFunctions.getProfiles();
             setNavigate(true);
+            setTimeout(function(){
+                window.location.reload();
+                setNavigate(true);
+                props.SetIsLogged(true);
+                return (
+                    <Spinner
+                       animation="border"
+                       variant="danger"
+                       role="status"
+                       style={{
+                          width: "200px",
+                          height: "200px",
+                          margin: "auto",
+                          display: "block",
+                          zIndexL: "9999"
+                       }}
+                    />
+                 );
+            }, 500);
         }).catch(function (error) {
             console.log(error.response.data);
             setIsError(true);
+            setNavigate(false);
         });
     }
 
