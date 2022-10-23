@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "userprofile",
+    "useractivity",
+    "drf_api_logger",
     "leaflet",
     "rest_framework",
     "rest_framework.authtoken",
@@ -67,6 +69,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "drf_api_logger.middleware.api_logger_middleware.APILoggerMiddleware"
 ]
 
 ROOT_URLCONF = "usersmapapp_api.urls"
@@ -156,3 +159,6 @@ LEAFLET_CONFIG = {
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# DRF API Logger Add to Database
+DRF_API_LOGGER_DATABASE = True 

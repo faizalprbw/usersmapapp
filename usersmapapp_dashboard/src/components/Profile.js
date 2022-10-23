@@ -5,6 +5,8 @@ import { Button, Container, Row, Col, Spinner } from "react-bootstrap";
 import {commonFunctions} from "../helpers/commonFunctions"
 import Select from 'react-select';
 import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import L, { MarkerCluster } from "leaflet";
+import 'leaflet/dist/leaflet.css'
 
 
 export const Profile = (props) => {
@@ -15,6 +17,12 @@ export const Profile = (props) => {
     const [addressdescription, setAddressdescription] = useState('');
     const [navigate, setNavigate] = useState(false);
     const [isError, setIsError] = useState(false);
+
+    const customIcon = new L.Icon({
+        iconUrl: require("./location.svg").default,
+        iconSize: new L.Point(40, 47)
+    });
+    
     let center;
     if(localStorage.getItem('location')){
         center = {
@@ -44,6 +52,7 @@ export const Profile = (props) => {
 
         return (
             <Marker
+                icon={customIcon}
                 draggable={draggable}
                 eventHandlers={eventHandlers}
                 position={position}
@@ -79,7 +88,7 @@ export const Profile = (props) => {
         uploadData.append('phone_number', phonenumber);
         uploadData.append('address_location', 'SRID=4326;POINT ('+position["lng"].toString()+' '+position["lat"].toString()+')');
         uploadData.append('address_description', addressdescription);
-        
+
         axios({
             method: 'post',
             url: 'profiles/',

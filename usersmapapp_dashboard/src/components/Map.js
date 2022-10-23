@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Alert, Spinner } from "react-bootstrap";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import useSWR from "swr";
+import MarkerClusterGroup from 'react-leaflet-cluster'
+import L, { MarkerCluster } from "leaflet";
+import 'leaflet/dist/leaflet.css'
 
 
 const fetcher = (url) => axios.get(url).then((res) => res.data);
@@ -13,6 +16,11 @@ export const Map = () => {
    const userprofiles = data && !error ? data : {};
    const position = [-6.195, 106.823];
    const zoom = 10;
+
+   const customIcon = new L.Icon({
+      iconUrl: require("./location.svg").default,
+      iconSize: new L.Point(40, 47)
+    });
 
    if (error) {
       return <Alert variant="danger">Smoething Wrong</Alert>;
@@ -39,8 +47,12 @@ export const Map = () => {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
          />
+         <MarkerClusterGroup
+            chunkedLoading
+         >
          {userprofiles.features.map((userprofile) => (
             <Marker
+               icon={customIcon}
                key={userprofile.properties.name}
                position={[
                   userprofile.geometry.coordinates[1],
@@ -68,6 +80,7 @@ export const Map = () => {
                </Popup>
             </Marker>
          ))}
+         </MarkerClusterGroup>
       </MapContainer>
    );
 };
